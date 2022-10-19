@@ -2,7 +2,7 @@ using Workshop.Common;
 
 namespace Workshop.CSharp.Introduction.ExercisesB
 {
-    [TestClass]
+    /*[TestClass]*/
     public class IntroductionExercises
     {
         /// <summary>
@@ -45,15 +45,7 @@ namespace Workshop.CSharp.Introduction.ExercisesB
                     ConsoleDialog();
                 }
             }
-                
-                
-
-
-            
-
-            
-        
-        
+       
         }
 
         /// <summary>

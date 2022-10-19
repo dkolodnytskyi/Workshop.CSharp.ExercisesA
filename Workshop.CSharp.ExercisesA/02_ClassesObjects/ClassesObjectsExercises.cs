@@ -22,7 +22,66 @@ namespace Workshop.CSharp.ClassesObjects.ExercisesB
         /// Napisac kod testujacy dzialanie klasy oraz metody.
         /// </summary>
         [TestMethod]
-        public void IntPairs() { }
+        public void IntPairs()
+        {
+            IntPair intPair = new IntPair(2, 4);
+            var result = IntPair.FindMaxValue(new int[] { 2, 1, 4, -1, 0 });
+            Console.WriteLine("max" + result.Value1 + "min" + result.Value2);
+
+        }
+
+        class IntPair
+        {
+            public int Value1 { get; set; }
+            public int Value2 { get; set; }
+
+
+            public IntPair()
+            {
+
+            }
+
+            public IntPair(int value)
+            {
+                value = Value1 = Value2;
+
+            }
+
+            public IntPair(int value1, int value2)
+            {
+                Value1 = value1;
+                Value2 = value2;
+            }
+
+            public void Swap()
+            {
+                Value1 = Value2;
+            }
+
+            public static IntPair FindMaxValue(int[] arr)
+            {
+                int min = 0;
+                int max = 0;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] > max)
+                    {
+                        max = arr[i];
+                    }
+                    else if (arr[i] < min)
+                    {
+                        min = arr[i];
+                    }
+
+
+                }
+
+                return new IntPair(max, min);
+
+            }
+
+        }
+
 
 
         /// <summary>
@@ -36,6 +95,71 @@ namespace Workshop.CSharp.ClassesObjects.ExercisesB
         /// Napisac kod testujacy dzialanie klasy.
         /// </summary>
         [TestMethod]
-        public void Employees() { }
+        public void Employees() 
+        {
+            var daniel = new Employee("Daniel", new DateTime(2012, 1, 1),100);
+            var Marcin = new Employee("Marcin", new DateTime(2020, 1, 1), 200);
+
+            Console.WriteLine("Pracownik " + daniel.Name + "zarabia" + daniel.Salary);
+            daniel.GiveARise();
+            
+        }
+
+        public class Employee
+        {
+            DateTime CurrentTime = DateTime.Now;
+            
+
+            public string Name { get; private set; }
+            public DateTime DateOfEmployement { get; private set; }
+            private decimal _salary;
+
+            public decimal Salary
+            {
+                get
+                {
+                    return _salary;
+                }
+                set
+                {
+                    if (value > 0 && value > _salary)
+                        _salary = value;
+                }
+            }
+                    
+            
+
+            public Employee(string name,DateTime dateofemployement,decimal salary)
+            {
+                Name = name;
+                DateOfEmployement = dateofemployement;
+                salary = _salary; 
+
+
+
+            }
+            public void GiveARise()
+            {
+              
+
+            }
+
+            public static decimal CalculateAverageSalary(Employee[] arr)
+            {
+                if (arr.Length == 0)
+                    return 0;
+
+                decimal sum = 0;
+                foreach (var employee in arr)
+                {
+                    sum += employee._salary;
+
+                }
+                return sum/arr.Length;
+
+            }
+
+
+        }
     }
 }
