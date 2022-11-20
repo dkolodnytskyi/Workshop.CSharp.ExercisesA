@@ -3,8 +3,11 @@
     public class Administrator
     {
         public Doctor Doctor { get; set; }
+        public Visit Visit { get; set; }
 
-        List<Doctor> doctors = new List<Doctor>();
+        public static List<Doctor> doctors = new List<Doctor>();
+        public static List<Patient> patients = new List<Patient>();
+        public static List<Visit> visits = new List<Visit>(); 
         List<List<DateTime>> ListsOfTerms = new List<List<DateTime>>();
         
         
@@ -16,13 +19,13 @@
             
         }
 
-        public void AddDocotor(string DoctorName, string DoctorSurName, string DocotrSpecialty)
+        /*public void AddDocotor(string DoctorName, string DoctorSurName, string DocotrSpecialty)
         {
             Doctor doctor = new Doctor(DoctorName, DoctorSurName, DocotrSpecialty);
             doctors.Add(doctor);
             
 
-        }
+        }*/
 
         public void ShowDoctors()
         {

@@ -1,0 +1,23 @@
+﻿@using WebApplication2.ViewModels
+@model VisitViewModel
+
+
+
+<form asp-controller="Admin" asp-action="CreateVisit">
+    <select asp-for="DoctorName">
+        @foreach (var doctor in Administrator.doctors)
+        {
+            <option value="@doctor.Name">
+                @doctor.Name
+            </option>
+            
+        }
+    </select>
+    <div>Patients name</div><input asp-for="PatientName"/>
+    <div>Patients surname</div><input asp-for="PatientSurName"/>
+    <div>Date of birth</div><input type = "date" asp-for="DateOfBirth"/>
+    <div>Reason of the visit</div><input asp-for="ReasonOfVisit"/>
+
+    <input type="submit" value="send"/>
+
+</form>

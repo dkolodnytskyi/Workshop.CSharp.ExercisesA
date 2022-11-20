@@ -1,13 +1,13 @@
 ﻿namespace WebApplication2.Models
 {
-    public class Time
+    public class Slot
     {
         public DateOnly Day { get; set; }
         public TimeOnly StartHour { get; set; }
         public TimeOnly EndHour { get; set; }
         public bool BookedUp { get; set; }
 
-        public Time(DateOnly day, TimeOnly startHour, TimeOnly endHour)
+        public Slot(DateOnly day, TimeOnly startHour, TimeOnly endHour)
         {
             Day = day;
             StartHour = startHour;

@@ -1,0 +1,41 @@
+﻿@model List<Patient>
+<table class="table-bordered">
+
+    <thead>
+        <tr>
+            <th>
+                Patient name
+            </th>
+            <th>
+                Patient surname
+            </th>
+            <th>
+                Patient date of birth
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var patient in Model)
+            {
+                <tr>
+                    <th>
+                        @patient.Name
+                    </th>
+                    <th>
+                        @patient.SurName
+                    </th>
+                    <th>
+                        @patient.DateOfBirth
+                    </th>
+
+                </tr>
+
+            }
+
+        }
+
+    </tbody>
+</table>

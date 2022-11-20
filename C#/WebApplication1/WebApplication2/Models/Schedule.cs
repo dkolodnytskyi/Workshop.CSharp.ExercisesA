@@ -2,26 +2,26 @@
 {
     public class Schedule
     {
-        public Time Time { get; set; }
+        public Slot Time { get; set; }
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
 
-        Dictionary<int, List<Time>> ReceptionHours = new Dictionary<int, List<Time>>();
+        Dictionary<int, List<Slot>> ReceptionHours = new Dictionary<int, List<Slot>>();
 
 
-        public void AddHourVisit(Patient Patient, DateOnly day, TimeOnly startHour, TimeOnly endHour)
+        public void AddHourVisit(Patient patient, DateOnly day, TimeOnly startHour, TimeOnly endHour)
         {
             
-            Time time = new Time(day, startHour, endHour);
+            Slot time = new Slot(day, startHour, endHour);
             time.SetStatus(true);
-            if (ReceptionHours.TryGetValue(Patient.Id, out List<Time> hours))
+            if (ReceptionHours.TryGetValue(Patient.Id, out List<Slot> hours))
             {
                 
                 ReceptionHours[Patient.Id].Add(time) ;
             }
             else
             {
-                ReceptionHours.Add(Patient.Id, new List<Time>() {time});
+                ReceptionHours.Add(Patient.Id, new List<Slot>() {time});
             }
             
             

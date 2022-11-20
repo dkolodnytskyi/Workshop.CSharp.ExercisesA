@@ -1,0 +1,11 @@
+﻿@model Patient
+
+
+<form asp-controller="Admin" asp-action="CreatePatient">
+    <input asp-for="Name"/>
+    <input asp-for="SurName"/>
+    <input type = "date" asp-for="DateOfBirth"/>
+    <input type="submit" value="send"/>
+
+</form>
+@Html.Partial("ShowPatients", Administrator.patients)

@@ -1,0 +1,53 @@
+﻿@model List<Doctor>
+
+<table class="table-bordered">
+
+    <thead>
+        <tr>
+            <th>
+                Doctor name
+            </th>
+            <th>
+                Doctor surname
+            </th>
+            <th>
+                Doctor specialty
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {            
+            @foreach (var doctor in Model)
+            {
+                <tr>
+                    <th>
+                        @doctor.Name
+                    </th>
+                    <th>
+                        @doctor.SurName
+                    </th>
+                    <th>
+                        @doctor.Specialty
+                    </th>
+                    <th>
+                        <button>
+                            edit                          
+                        </button>
+                    </th>
+                    <th>
+                        <button>
+                            delete
+                        </button>
+                    </th>
+
+                </tr>
+
+            }
+
+        }
+
+    </tbody>
+</table>
+
