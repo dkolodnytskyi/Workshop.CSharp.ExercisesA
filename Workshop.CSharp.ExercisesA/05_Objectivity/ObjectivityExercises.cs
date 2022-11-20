@@ -5,7 +5,7 @@ using Workshop.Common;
 
 namespace Workshop.CSharp.Objectivity.ExercisesB
 {
-//    [TestClass]
+    [TestClass]
     public class ObjectivityExercises
     {
         /// <summary>
@@ -21,7 +21,63 @@ namespace Workshop.CSharp.Objectivity.ExercisesB
         /// za pomoca metody 'Array.Sort(tablica, comparer)'
         /// </summary>
         [TestMethod]
-        public void ObjectsInterfaces()  {  }
+        public void ObjectsInterfaces()  
+        {
+            var magazine = new Magazine("Test",100);
+
+            Console.WriteLine(magazine);
+        }
+
+       abstract class Periodical
+        {
+            public string Name { get; set; }
+
+            public int NumOfPages { get; set; }
+
+            public Periodical(string name, int numOfPages)
+            {
+                Name = name;
+                NumOfPages = numOfPages;
+            }
+
+            public override string ToString()
+            {
+                return Name;
+            }
+
+            /*public virtual int GetNumberPages();*/
+        }
+
+        sealed class Magazine : Periodical
+        {
+            public Magazine(string name, int numOfPages) : base(name, numOfPages)
+            {
+            }
+        }
+
+
+
+
+        public class Class
+        {
+            public string Name { get; set;}
+
+            public int RoomNumber { get; set;}
+
+
+            public override string ToString()
+            {
+                return Name;
+            }
+        }
+
+        public interface ISaveable
+        {
+
+        }
+
+        /*public interface INotifyPropertyChanged*/
+
 
 
 

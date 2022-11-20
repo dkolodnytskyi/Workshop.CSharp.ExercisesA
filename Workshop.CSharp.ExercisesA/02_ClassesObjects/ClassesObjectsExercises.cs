@@ -5,7 +5,7 @@ using Workshop.Common;
 
 namespace Workshop.CSharp.ClassesObjects.ExercisesB
 {
-    //[TestClass]
+   /* [TestClass]*/
     public class ClassesObjectsExercises
     {
         /// <summary>
@@ -133,13 +133,16 @@ namespace Workshop.CSharp.ClassesObjects.ExercisesB
             {
                 Name = name;
                 DateOfEmployement = dateofemployement;
-                salary = _salary; 
+                _salary = salary;
+                 
 
 
 
             }
             public void GiveARise()
             {
+                _salary += _salary * 0.01m * (DateTime.Now.Year - DateOfEmployement.Year);
+                Console.WriteLine(_salary);
               
 
             }

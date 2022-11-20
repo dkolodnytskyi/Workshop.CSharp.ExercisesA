@@ -11,4 +11,13 @@
     <ProjectReference Include="..\Workshop.Common\Workshop.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\SampleData\Categories.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\SampleData\Products.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

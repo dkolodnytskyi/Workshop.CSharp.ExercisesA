@@ -5,7 +5,7 @@ using Workshop.Common;
 
 namespace Workshop.CSharp.CSharp2.ExercisesB
 {
-    [TestClass]
+    /*[TestClass]*/
     public class GenericExercises
     {
         /// <summary>
@@ -47,6 +47,7 @@ namespace Workshop.CSharp.CSharp2.ExercisesB
 
             public void Swap()
             {
+                var tmp = this.Value1;
                 Value1 = Value2;
             }
         }
@@ -107,6 +108,7 @@ namespace Workshop.CSharp.CSharp2.ExercisesB
                     result.Add(len, 1);
                 }
             }
+
 
             return result;
 

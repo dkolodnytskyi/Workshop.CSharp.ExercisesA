@@ -8,7 +8,7 @@ using Workshop.Common;
 
 namespace Workshop.CSharp.CSharp3.ExercisesB
 {
-//    [TestClass]
+    [TestClass]
     public class LinqExercises
     {
         // Uwagi:
@@ -21,7 +21,17 @@ namespace Workshop.CSharp.CSharp3.ExercisesB
         /// (where, select)
         /// </summary>
         [TestMethod]
-        public void WhereSelect()  {  }
+        public void WhereSelect()  
+        {
+            /*var result = DataProvider.Products.Where(p => p.UnitPrice > 10);
+
+            result.Print();*/
+
+            var exercises = DataProvider.Products
+                .Where(p => p.UnitPrice > 50 && p.UnitPrice < 100)
+                .Select(p => new { p.UnitPrice, p.ProductName }).ToList();
+            exercises.Print();
+        }
 
         /// <summary>
         /// Zapytanie zwracajace nazwy i wartosci calkowite (=UnitPrice*UnitsInStock) produktow, posortowane 
@@ -29,7 +39,13 @@ namespace Workshop.CSharp.CSharp3.ExercisesB
         /// (let, orderby, select)
         /// </summary>
         [TestMethod]
-        public void LetOrderBy()  {  }
+        public void LetOrderBy() 
+        {
+            var result = DataProvider.Products
+                .Select(p => new { p.ProductName, Total = p.UnitPrice * p.UnitsInStock })
+                .OrderBy(m => m.Total);
+            result.Print();
+        }
 
         /// <summary>
         /// Zapytanie zwracajace nazwy ProductName oraz nazwy CategoryName, posortowane po CategoryName
@@ -37,14 +53,22 @@ namespace Workshop.CSharp.CSharp3.ExercisesB
         /// (join, orderby, select)
         /// </summary>
         [TestMethod]
-        public void Join()  {  }
+        public void Join()  
+        {
+            
+        }
 
         /// <summary>
         /// Zapytanie zwracajace druga piatke najdrozszych produktow.
         /// (orderby, skip, take)
         /// </summary>
         [TestMethod]
-        public void TakeSkip()  {  }
+        public void TakeSkip()  
+        {
+            var result1 = DataProvider.Products.OrderByDescending(p => p.UnitPrice)
+                .Skip(5)
+                .Take(5);
+        }
 
 
         /// <summary>
