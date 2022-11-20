@@ -1,7 +1,10 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class Schedule
     {
+        [Key]
         public Slot Time { get; set; }
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }

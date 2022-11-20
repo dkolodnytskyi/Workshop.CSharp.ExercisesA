@@ -1,5 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Doctor
+
+<form asp-controller="Admin" asp-action="SaveDoctorChanges" >
+    <input readonly value="@Model.Id" asp-for="Id"/>
+    <input value="@Model.Name" asp-for="Name"/>
+    <input value="@Model.SurName" asp-for="SurName"/>
+    <input value="@Model.Specialty" asp-for="Specialty"/>
+    <input type="submit" value="save"/>
+</form>

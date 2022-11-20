@@ -1,4 +1,4 @@
-﻿@model List<Doctor>
+﻿@model IEnumerable<Doctor>
 
 <table class="table-bordered">
 
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
         @if (Model != null)
-        {            
+        {
             @foreach (var doctor in Model)
             {
                 <tr>
@@ -32,12 +32,12 @@
                         @doctor.Specialty
                     </th>
                     <th>
-                        <button>
-                            edit                          
-                        </button>
+                        <form asp-controller="Admin" asp-action="EditDoctor" asp-route-id="@doctor.Id">
+                            <input type="submit" value="edit" />
+                        </form>
                     </th>
                     <th>
-                        <button>
+                        <button asp-action="DeleteDoctor">
                             delete
                         </button>
                     </th>

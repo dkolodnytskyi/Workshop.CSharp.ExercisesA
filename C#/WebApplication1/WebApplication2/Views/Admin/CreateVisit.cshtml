@@ -5,7 +5,7 @@
 
 <form asp-controller="Admin" asp-action="CreateVisit">
     <select asp-for="DoctorName">
-        @foreach (var doctor in Administrator.doctors)
+        @foreach (var doctor in ViewBag.doctors)
         {
             <option value="@doctor.Name">
                 @doctor.Name

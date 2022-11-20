@@ -1,9 +1,13 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class Visit
     {
-        public Patient patient { get; set; }
-        public Doctor doctor { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public Patient Patient { get; set; }
+        public Doctor Doctor { get; set; }
 
         public string ReasonOfVisit { get; set; }
     }

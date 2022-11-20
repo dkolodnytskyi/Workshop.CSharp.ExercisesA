@@ -1,10 +1,11 @@
 ﻿@model Patient
 
 
-<form asp-controller="Admin" asp-action="CreatePatient">
+<form asp-controller="Admin" asp-action="EditPatient">
     <input asp-for="Id"/>
     <input asp-for="Name"/>
     <input asp-for="SurName"/>
+    <input asp-for="DateOfBirth"/>
     <input type="submit" value="send"/>
 
 </form>

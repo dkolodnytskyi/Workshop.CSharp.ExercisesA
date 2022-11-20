@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.ViewModels;
 
@@ -6,6 +8,12 @@ namespace WebApplication2.Controllers
 {
     public class AdminController : Controller
     {
+        AdministratorContext db;
+
+        public AdminController(AdministratorContext db)
+        {
+            this.db = db;
+        }
 
         public IActionResult Index()
         {
@@ -19,7 +27,9 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult CreatingDoctor(Doctor doctor)
         {
-            Administrator.doctors.Add(doctor);
+            db.doctors.Add(doctor);
+            ViewData["doctors"] = db.doctors;
+            db.SaveChanges();
 
             return View();
 
@@ -27,21 +37,23 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult CreatingDoctor()
         {
+            ViewData["doctors"] = db.doctors;
 
-          return View();
+            return View();
 
         }
         [HttpGet]
         public IActionResult ShowDoctors()
         {
-            var doctors = new List<Doctor>();
 
-            return View(Administrator.doctors.OrderBy(s=>s.SurName).ToList());
+            return View(db.doctors);
         }
         [HttpPost]
         public IActionResult CreatePatient(Patient patient)
         {
-            Administrator.patients.Add(patient);
+            db.patients.Add(patient);
+            ViewData["patients"] = db.patients;
+            db.SaveChanges();
 
             return View();
         }
@@ -49,27 +61,29 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult CreatePatient()
         {
+            ViewData["patients"] = db.patients;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult ShowPatients()
         {
-            return View(Administrator.patients);
+            return View(db.patients);
         }
 
         [HttpPost]
         public IActionResult CreateVisit(VisitViewModel newVisit)
         {
             Visit visit = null;
-            Doctor FoundDoctor = Administrator.doctors.FirstOrDefault(m => m.Name == newVisit.DoctorName);
-            Patient FoundPatient = Administrator.patients.FirstOrDefault(m => m.Name == newVisit.PatientName);
+            Doctor FoundDoctor = db.doctors.FirstOrDefault(m => m.Name == newVisit.DoctorName);
+            Patient FoundPatient = db.patients.FirstOrDefault(m => m.Name == newVisit.PatientName);
             if (FoundPatient != null)
             {
                 visit = new Visit()
                 {
-                    patient = FoundPatient,
-                    doctor = FoundDoctor,
+                    Patient = FoundPatient,
+                    Doctor = FoundDoctor,
                     ReasonOfVisit = newVisit.ReasonOfVisit,
                 };
             }
@@ -82,17 +96,21 @@ namespace WebApplication2.Controllers
                     DateOfBirth = newVisit.DateOfBirth
                 };
 
-                Administrator.patients.Add(NewPatient);
+                db.patients.Add(NewPatient);
                 visit = new Visit()
                 {
-                    doctor = FoundDoctor,
-                    patient = NewPatient,
+                    Doctor = FoundDoctor,
+                    Patient = NewPatient,
                     ReasonOfVisit = newVisit.ReasonOfVisit
                     
                 };
             }
             
-            Administrator.visits.Add(visit);
+            db.visits.Add(visit);
+
+            db.SaveChanges();
+
+            ViewBag.doctors = db.doctors;
 
 
             return View();
@@ -101,28 +119,43 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult CreateVisit()
         {
-            ViewBag.doctors = Administrator.doctors;
+            ViewBag.doctors = db.doctors;
+
             return View();
         }
 
         [HttpGet]
         public IActionResult ShowVisits()
         {
-            return View(Administrator.visits);
+            IEnumerable<Visit> visits = db.visits.Include(v=>v.Doctor).Include(a=>a.Patient);
+            return View(visits);
         }
 
-        /*[HttpPut]
+        [HttpPut]
         public IActionResult EditPatient(int id)
         {
-            foreach (var patient in Administrator.patients)
-            {
-                if (patient.Id == id)
-                {
+            
 
-                }
-            }
+            db.SaveChanges();
+            return View();
+        }
 
-        }*/
+        [HttpPost]
+        public IActionResult EditDoctor(int? id)
+        {
+            Doctor doctor = db.doctors.FirstOrDefault(v => v.Id == id);
+
+            return View(doctor);
+
+        }
+
+        [HttpPost]
+        public IActionResult SaveDoctorChanges(Doctor doctor)
+        {
+            db.Update(doctor);
+            db.SaveChanges();
+            return RedirectToAction("ShowDoctors");
+        }
 
     }
 }
