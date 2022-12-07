@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication2.Data;
 
@@ -11,9 +12,11 @@ using WebApplication2.Data;
 namespace WebApplication2.Migrations
 {
     [DbContext(typeof(AdministratorContext))]
-    partial class AdministratorContextModelSnapshot : ModelSnapshot
+    [Migration("20221128105037_addschedule1")]
+    partial class addschedule1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace WebApplication2.Migrations
                     b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VisitDuration")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -91,6 +91,29 @@ namespace WebApplication2.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("schedule");
+                });
+
+            modelBuilder.Entity("WebApplication2.Models.Visit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ReasonOfVisit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -101,10 +124,29 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("schedule");
+                    b.ToTable("visits");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Schedule", b =>
+                {
+                    b.HasOne("WebApplication2.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication2.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("WebApplication2.Models.Visit", b =>
                 {
                     b.HasOne("WebApplication2.Models.Doctor", "Doctor")
                         .WithMany()

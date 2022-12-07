@@ -30,6 +30,16 @@
                     <th>
                         @patient.DateOfBirth
                     </th>
+                    <th>
+                        <form asp-controller="Admin" asp-action="EditPatient" asp-route-id="@patient.Id">
+                            <input type="submit" value="edit" />
+                        </form>
+                    </th>
+                    <th>
+                        <button asp-action="DeletePatient">
+                            delete
+                        </button>
+                    </th>
 
                 </tr>
 

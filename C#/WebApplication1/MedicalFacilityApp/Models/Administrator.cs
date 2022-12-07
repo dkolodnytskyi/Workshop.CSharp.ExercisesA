@@ -3,11 +3,10 @@
     public class Administrator
     {
         public Doctor Doctor { get; set; }
-        public Visit Visit { get; set; }
+        
 
         public static List<Doctor> doctors = new List<Doctor>();
         public static List<Patient> patients = new List<Patient>();
-        public static List<Visit> visits = new List<Visit>(); 
         List<List<DateTime>> ListsOfTerms = new List<List<DateTime>>();
         
         

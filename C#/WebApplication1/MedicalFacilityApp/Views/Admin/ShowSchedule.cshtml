@@ -1,20 +1,21 @@
-﻿@model IEnumerable<Doctor>
+﻿@model IEnumerable<Schedule>
+
 
 <table class="table-bordered">
 
     <thead>
         <tr>
             <th>
-                Doctor name
+                Patient
             </th>
             <th>
-                Doctor surname
+                Doctor
             </th>
             <th>
-                Doctor specialty
+                Reason of visit
             </th>
             <th>
-                Doctor visit durration
+                Time of visit
             </th>
 
         </tr>
@@ -22,30 +23,30 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach (var doctor in Model)
+            @foreach (var schedule in Model)
             {
                 <tr>
                     <th>
-                        @doctor.Name
+                        @schedule.Patient.Name @schedule.Patient.SurName
                     </th>
                     <th>
-                        @doctor.SurName
+                        @schedule.Doctor.Name @schedule.Doctor.SurName @schedule.Doctor.Specialty @schedule.Doctor.VisitDuration 
                     </th>
                     <th>
-                        @doctor.Specialty
+                        @schedule.ReasonOfVisit
                     </th>
                     <th>
-                        @doctor.VisitDuration
+                        @schedule.DateOfVisit
                     </th>
                     <th>
-                        <form asp-controller="Doctor" asp-action="EditDoctor" asp-route-id="@doctor.Id">
+                        <form asp-controller="Admin" asp-action="EditVisitInSchedule" asp-route-id="@schedule.Id">
                             <input type="submit" value="edit" />
                         </form>
                     </th>
                     <th>
-                        <form asp-action="DeleteDoctor" asp-route-id="@doctor.Id">
-                            <input type="submit" value="delete"/>
-                        </form>
+                        <button asp-action="DeleteVisit">
+                            delete
+                        </button>
                     </th>
 
                 </tr>
@@ -56,4 +57,5 @@
 
     </tbody>
 </table>
+
 

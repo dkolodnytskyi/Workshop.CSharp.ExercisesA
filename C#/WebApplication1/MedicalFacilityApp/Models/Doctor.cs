@@ -9,6 +9,7 @@ namespace WebApplication2.Models
         public string Name { get; set; }
         public string SurName { get; set; }
         public string Specialty { get; set; }
+        public int VisitDuration { get; set; }
 
 
         /*public Doctor(string name, string surName, string specialty)

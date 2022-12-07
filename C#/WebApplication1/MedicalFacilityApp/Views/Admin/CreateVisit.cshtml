@@ -1,23 +1,31 @@
-﻿@using WebApplication2.ViewModels
-@model VisitViewModel
+﻿@model IEnumerable<Doctor>
 
-
-
-<form asp-controller="Admin" asp-action="CreateVisit">
-    <select asp-for="DoctorName">
-        @foreach (var doctor in ViewBag.doctors)
-        {
-            <option value="@doctor.Name">
+@if (Model != null)
+{
+    @foreach (var doctor in Model)
+    {
+        <tr>
+            <th>
                 @doctor.Name
-            </option>
-            
-        }
-    </select>
-    <div>Patients name</div><input asp-for="PatientName"/>
-    <div>Patients surname</div><input asp-for="PatientSurName"/>
-    <div>Date of birth</div><input type = "date" asp-for="DateOfBirth"/>
-    <div>Reason of the visit</div><input asp-for="ReasonOfVisit"/>
+            </th>
+            <th>
+                @doctor.SurName
+            </th>
+            <th>
+                @doctor.Specialty
+            </th>
+            <th>
+                @doctor.VisitDuration
+            </th>
 
-    <input type="submit" value="send"/>
+            <th>
+                <form asp-controller="Admin" asp-action="RegisterToVisit" asp-route-id="@doctor.Id">
+                    <input type="submit" value="register" />
+                </form>
+            </th>
+        </tr>
 
-</form>
+    }
+
+}
+
