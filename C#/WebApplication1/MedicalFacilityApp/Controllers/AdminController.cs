@@ -24,111 +24,31 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        /*[HttpPost]
-        public IActionResult CreatingDoctor(Doctor doctor)
-        {
-            db.doctors.Add(doctor);
-            ViewData["doctors"] = db.doctors;
-            db.SaveChanges();
 
-            return View();
-
-        }*/
-        [HttpGet]
-        public IActionResult CreatingDoctor()
-        {
-            ViewData["doctors"] = db.doctors;
-
-            return View();
-
-        }
-        /*[HttpGet]
-        public IActionResult ShowDoctors()
-        {
-
-            return View(db.doctors);
-        }*/
-        [HttpPost]
-        public IActionResult CreatePatient(Patient patient)
-        {
-            db.patients.Add(patient);
-            ViewData["patients"] = db.patients;
-            db.SaveChanges();
-
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult CreatePatient()
-        {
-            ViewData["patients"] = db.patients;
-
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult ShowPatients()
-        {
-            return View(db.patients);
-        }
-
-        
 
         [HttpGet]
         public IActionResult CreateVisit()
         {
-            
+
 
             return View(db.doctors);
         }
-        
-        [HttpPost]
-        public IActionResult EditPatient(int? id)
-        {
-            Patient patient = db.patients.FirstOrDefault(v => v.Id == id);
-
-            return View(patient);
-        }
-
-        /*[HttpPost]
-        public IActionResult EditDoctor(int? id)
-        {
-            Doctor doctor = db.doctors.FirstOrDefault(v => v.Id == id);
-
-            return View(doctor);
-
-        }*/
 
         [HttpPost]
         public IActionResult EditVisitInSchedule(int? id)
         {
             Schedule schedule = db.schedule.Include(x => x.Doctor).Include(x => x.Patient).FirstOrDefault(x => x.Id == id);
 
- 
+
             return View(schedule);
 
         }
 
-        /*[HttpPost]
-        public IActionResult SaveDoctorChanges(Doctor doctor)
-        {
-            db.Update(doctor);
-            db.SaveChanges();
-            return RedirectToAction("ShowDoctors");
-        }*/
-
-        [HttpPost]
-        public IActionResult SavePatientChanges(Patient patient)
-        {
-            db.Update(patient);
-            db.SaveChanges();
-            return RedirectToAction("ShowPatients");
-        }
 
         [HttpPost]
         public IActionResult SaveVisitChanges(Schedule schedule)
         {
-            Schedule EditedSchedule = db.schedule.FirstOrDefault(m=>m.Id== schedule.Id);
+            Schedule EditedSchedule = db.schedule.FirstOrDefault(m => m.Id == schedule.Id);
             EditedSchedule.DateOfVisit = schedule.DateOfVisit;
             EditedSchedule.ReasonOfVisit = schedule.ReasonOfVisit;
             db.Update(EditedSchedule);
@@ -136,9 +56,6 @@ namespace WebApplication2.Controllers
             return RedirectToAction("ShowSchedule");
         }
 
-        
-
-        
 
         [HttpPost]
         public IActionResult RegisterToVisit(int id)
@@ -164,8 +81,8 @@ namespace WebApplication2.Controllers
                                                             m.DateOfBirth == visitView.DateOfBirth);
 
             Doctor doctor = db.doctors.FirstOrDefault(m => m.Id == visitView.DoctorId);
-                                                        
-            if(patient != null && doctor != null)
+
+            if (patient != null && doctor != null)
             {
                 NewSchedule = new Schedule()
                 {
@@ -173,12 +90,12 @@ namespace WebApplication2.Controllers
                     Doctor = doctor,
                     DateOfVisit = TimeOfVisit,
                     ReasonOfVisit = visitView.ReasonOfVisit,
-                   
+
 
                 };
-                
+
             }
-            else if(patient == null)
+            else if (patient == null)
             {
                 Patient newPatient = new Patient()
                 {
@@ -203,7 +120,7 @@ namespace WebApplication2.Controllers
 
             db.schedule.Add(NewSchedule);
             db.SaveChanges();
-            
+
 
             return RedirectToAction(nameof(ApproveToVisit));
         }
@@ -218,24 +135,9 @@ namespace WebApplication2.Controllers
         public IActionResult ShowSchedule()
         {
             var schedule = db.schedule.Include(x => x.Doctor).Include(x => x.Patient);
-            
+
             return View(schedule);
         }
-
-        /*[HttpPost]
-        public IActionResult DeleteDoctor(int? id)
-        {
-            Doctor doctor = db.doctors.FirstOrDefault(m => m.Id == id);
-            db.doctors.Remove(doctor);
-            db.SaveChanges();
-
-            return View("ShowDoctors");
-
-        } */
-        
-
-
-      
 
     }
 }

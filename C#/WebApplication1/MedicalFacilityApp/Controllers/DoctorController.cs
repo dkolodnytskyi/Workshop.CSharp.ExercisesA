@@ -66,6 +66,13 @@ namespace WebApplication2.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult ShowDoctors()
+        {
+
+            return View(db.doctors);
+        }
+
 
     }
 }
