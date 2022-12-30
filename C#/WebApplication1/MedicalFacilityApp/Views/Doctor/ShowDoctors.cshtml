@@ -1,5 +1,26 @@
 ﻿@model IEnumerable<Doctor>
 
+
+@using (Html.BeginForm("FilterDoctorsByFullName", "Doctor"))
+{
+    <p>
+        Filter by Name: @Html.TextBox("name")
+        Filter by SurName: @Html.TextBox("surName")
+
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+
+@using (Html.BeginForm("ShowAllDoctors", "Doctor"))
+{
+    <p>
+        
+        <input type="submit" value="Clear" />
+    </p>
+}
+
 <table class="table-bordered">
 
     <thead>
@@ -44,7 +65,7 @@
                     </th>
                     <th>
                         <form asp-action="DeleteDoctor" asp-route-id="@doctor.Id">
-                            <input type="submit" value="delete"/>
+                            <input type="submit" value="delete" />
                         </form>
                     </th>
 

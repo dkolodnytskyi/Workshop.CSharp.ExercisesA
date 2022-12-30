@@ -72,6 +72,22 @@ namespace WebApplication2.Controllers
             return View(doctorService.GetDoctors());
         }
 
+        [HttpPost]
+        public IActionResult ShowAllDoctors()
+        {
+
+            return RedirectToAction("ShowDoctors");
+        }
+
+        [HttpPost]
+        public IActionResult FilterDoctorsByFullName(string name, string surName)
+        {
+            var result = doctorService.FilterByFullName(name, surName);
+
+            return View(nameof(ShowDoctors), result);
+
+        }
+
 
     }
 }

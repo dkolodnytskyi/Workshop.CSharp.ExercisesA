@@ -16,8 +16,13 @@ namespace WebApplication2.Services.Interfaces
         Task DeleteAsync(int? id);
 
         IEnumerable<Doctor> GetDoctors();
-        
 
-        
+        IEnumerable<Doctor> FilterByName(string name);
+
+        IEnumerable<Doctor> FilterBySurName(string surName);
+
+        IEnumerable<Doctor> FilterByFullName(string name, string surName);
+
+
     }
 }

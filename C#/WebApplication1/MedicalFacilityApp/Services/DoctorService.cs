@@ -36,13 +36,52 @@ namespace WebApplication2.Services
 
         public Doctor Update(int? id)
         {
-           return db.doctors.FirstOrDefault(v => v.Id == id);
-   
+            return db.doctors.FirstOrDefault(v => v.Id == id);
+
         }
 
         public IEnumerable<Doctor> GetDoctors()
         {
             return db.doctors;
+        }
+
+        public IEnumerable<Doctor> FilterByName(string name)
+        {
+            return db.doctors.Where(n => n.Name.Contains(name))
+                      .OrderBy(n => n.Name);
+
+        }
+
+        public IEnumerable<Doctor> FilterBySurName(string surName)
+        {
+            return db.doctors.Where(n => n.SurName.Contains(surName))
+                      .OrderBy(n => n.SurName);
+
+        }
+
+        public IEnumerable<Doctor> FilterByFullName(string name, string surName)
+        {
+            if (name == null && surName == null)
+            {
+                return GetDoctors();
+            }
+            if (name == null)
+            {
+                return FilterBySurName(surName);
+            }
+
+            if (surName == null)
+            {
+                return FilterByName(name);
+            }
+
+
+            return db.doctors.Where(n => n.Name.Contains(name))
+                            .Where(m => m.SurName.Contains(surName))
+                            .OrderBy(n => n.Name)
+                            .OrderBy(m => m.SurName);
+
+
         }
     }
 }
