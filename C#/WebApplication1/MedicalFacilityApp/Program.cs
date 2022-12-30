@@ -1,11 +1,16 @@
 using WebApplication2.Data;
 using Microsoft.EntityFrameworkCore;
+using WebApplication2.Services.Interfaces;
+using WebApplication2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AdministratorContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+builder.Services.AddTransient<IDoctorService, DoctorService>();
+builder.Services.AddTransient<IPatientService, PatientService>();
+builder.Services.AddTransient<IVisitService, VisitService>();
 
 var app = builder.Build();
 
@@ -22,7 +27,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=CreateVisit}/{id?}");
 
 app.Run();
 

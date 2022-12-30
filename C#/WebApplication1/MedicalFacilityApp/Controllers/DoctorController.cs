@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.Services.Interfaces;
 
 namespace WebApplication2.Controllers
 {
     public class DoctorController : Controller
     {
-        AdministratorContext db;
+        public IDoctorService doctorService;
 
-        public DoctorController(AdministratorContext db)
+        public DoctorController(IDoctorService doctorService)
         {
-            this.db = db;
+            this.doctorService = doctorService;
         }
 
         public IActionResult Index()
@@ -19,11 +20,11 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatingDoctor(Doctor doctor)
+        public async Task<IActionResult> CreatingDoctor(Doctor doctor)
         {
-            db.doctors.Add(doctor);
-            ViewData["doctors"] = db.doctors;
-            db.SaveChanges();
+            await doctorService.CreateAsync(doctor);
+
+            ViewData["doctors"] = doctorService.GetDoctors();
 
             return View();
 
@@ -32,7 +33,7 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult CreatingDoctor()
         {
-            ViewData["doctors"] = db.doctors;
+            ViewData["doctors"] = doctorService.GetDoctors();
 
             return View();
 
@@ -41,28 +42,26 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult EditDoctor(int? id)
         {
-            Doctor doctor = db.doctors.FirstOrDefault(v => v.Id == id);
+            Doctor doctor = doctorService.Update(id);
 
             return View(doctor);
 
         }
 
         [HttpPost]
-        public IActionResult SaveDoctorChanges(Doctor doctor)
+        public async Task<IActionResult> SaveDoctorChanges(Doctor doctor)
         {
-            db.Update(doctor);
-            db.SaveChanges();
+            await doctorService.SaveChangesAsync(doctor);
+
             return RedirectToAction("ShowDoctors");
         }
 
         [HttpPost]
-        public IActionResult DeleteDoctor(int? id)
+        public async Task<IActionResult> DeleteDoctor(int? id)
         {
-            Doctor doctor = db.doctors.FirstOrDefault(m => m.Id == id);
-            db.doctors.Remove(doctor);
-            db.SaveChanges();
+            await doctorService.DeleteAsync(id);
 
-            return View("ShowDoctors");
+            return RedirectToAction(nameof(ShowDoctors));
 
         }
 
@@ -70,7 +69,7 @@ namespace WebApplication2.Controllers
         public IActionResult ShowDoctors()
         {
 
-            return View(db.doctors);
+            return View(doctorService.GetDoctors());
         }
 
 

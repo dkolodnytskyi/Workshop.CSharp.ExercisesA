@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.Services.Interfaces;
 
 namespace WebApplication2.Controllers
 {
     public class PatientController : Controller
     {
-        AdministratorContext db;
+        public IPatientService patientService;
 
-        public PatientController(AdministratorContext db)
+        public PatientController(IPatientService patientService)
         {
-            this.db = db;
+            this.patientService = patientService;
         }
 
         public IActionResult Index()
@@ -19,18 +20,18 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePatient(Patient patient)
+        public async Task<IActionResult> CreatePatient(Patient patient)
         {
-            db.patients.Add(patient);
-            ViewData["patients"] = db.patients;
-            db.SaveChanges();
-
-            return View();
+           await patientService.CreateAsync(patient);
+            
+            ViewData["patients"] = patientService.GetPatients();
+      
+            return RedirectToAction(nameof(ShowPatients));
         }
         [HttpGet]
         public IActionResult CreatePatient()
         {
-            ViewData["patients"] = db.patients;
+            ViewData["patients"] = patientService.GetPatients();
 
             return View();
         }
@@ -38,22 +39,21 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult ShowPatients()
         {
-            return View(db.patients);
+            return View(patientService.GetPatients());
         }
 
         [HttpPost]
         public IActionResult EditPatient(int? id)
         {
-            Patient patient = db.patients.FirstOrDefault(v => v.Id == id);
+            Patient patient = patientService.Update(id);
 
             return View(patient);
         }
 
         [HttpPost]
-        public IActionResult SavePatientChanges(Patient patient)
+        public async Task<IActionResult> SavePatientChanges(Patient patient)
         {
-            db.Update(patient);
-            db.SaveChanges();
+            await patientService.SaveChangesAsync(patient);
             return RedirectToAction("ShowPatients");
         }
     }

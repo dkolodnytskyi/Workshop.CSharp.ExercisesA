@@ -2,7 +2,7 @@
 
 namespace WebApplication2.Models
 {
-    public class Schedule
+    public class Visit
     {
         [Key]
         public int Id { get; set; }

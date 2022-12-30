@@ -7,7 +7,7 @@ namespace WebApplication2.Data
     {
         public DbSet<Doctor> doctors { get; set; }
         public DbSet<Patient> patients { get; set; }
-        public DbSet<Schedule> schedule { get; set; }
+        public DbSet<Visit> visits { get; set; }
         
         
 

@@ -2,125 +2,63 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.Services.Interfaces;
 using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
     public class AdminController : Controller
     {
-        AdministratorContext db;
-
-        public AdminController(AdministratorContext db)
+        public IVisitService visitService;
+    
+      public AdminController(IVisitService visitService)
         {
-            this.db = db;
+            this.visitService = visitService;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Admin()
-        {
-            return View();
-        }
-
 
         [HttpGet]
         public IActionResult CreateVisit()
         {
 
-
-            return View(db.doctors);
+            return View(visitService.GetDoctors());
         }
 
         [HttpPost]
         public IActionResult EditVisitInSchedule(int? id)
         {
-            Schedule schedule = db.schedule.Include(x => x.Doctor).Include(x => x.Patient).FirstOrDefault(x => x.Id == id);
+            Visit visit = visitService.EditVisit(id);
 
-
-            return View(schedule);
+            return View(visit);
 
         }
 
-
         [HttpPost]
-        public IActionResult SaveVisitChanges(Schedule schedule)
+        public async Task<IActionResult> SaveVisitChanges(Visit visit)
         {
-            Schedule EditedSchedule = db.schedule.FirstOrDefault(m => m.Id == schedule.Id);
-            EditedSchedule.DateOfVisit = schedule.DateOfVisit;
-            EditedSchedule.ReasonOfVisit = schedule.ReasonOfVisit;
-            db.Update(EditedSchedule);
-            db.SaveChanges();
+            await visitService.SaveVisitChangesAsync(visit);
+
             return RedirectToAction("ShowSchedule");
         }
 
 
         [HttpPost]
-        public IActionResult RegisterToVisit(int id)
+        public IActionResult ChooseDoctor(int id)
         {
-            Doctor doctor = db.doctors.FirstOrDefault(m => m.Id == id);
+            Doctor doctor = visitService.GetDoctors().FirstOrDefault(m => m.Id == id);
             ViewBag.doctor = doctor;
-            return View();
+            return View("RegisterToVisit");
         }
 
         [HttpGet]
-        public IActionResult RegisterToVisit()
+        public IActionResult ChooseDoctor()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult RegisterToDoctor(VisitViewModel visitView)
+        public async Task<IActionResult> RegisterToDoctor(VisitViewModel visitView)
         {
-            Schedule NewSchedule = null;
-            DateTime TimeOfVisit = new DateTime(visitView.DayOfVisit.Year, visitView.DayOfVisit.Month, visitView.DayOfVisit.Day, visitView.TimeOfVisit.Hour, visitView.TimeOfVisit.Minute, visitView.TimeOfVisit.Second);
-            Patient patient = db.patients.FirstOrDefault(m => m.Name == visitView.PatientName &&
-                                                            m.SurName == visitView.PatientSurName &&
-                                                            m.DateOfBirth == visitView.DateOfBirth);
-
-            Doctor doctor = db.doctors.FirstOrDefault(m => m.Id == visitView.DoctorId);
-
-            if (patient != null && doctor != null)
-            {
-                NewSchedule = new Schedule()
-                {
-                    Patient = patient,
-                    Doctor = doctor,
-                    DateOfVisit = TimeOfVisit,
-                    ReasonOfVisit = visitView.ReasonOfVisit,
-
-
-                };
-
-            }
-            else if (patient == null)
-            {
-                Patient newPatient = new Patient()
-                {
-                    Name = visitView.PatientName,
-                    SurName = visitView.PatientSurName,
-                    DateOfBirth = visitView.DateOfBirth
-
-                };
-
-                db.patients.Add(newPatient);
-
-                NewSchedule = new Schedule()
-                {
-                    Patient = newPatient,
-                    Doctor = doctor,
-                    DateOfVisit = TimeOfVisit,
-                    ReasonOfVisit = visitView.ReasonOfVisit
-
-                };
-
-            }
-
-            db.schedule.Add(NewSchedule);
-            db.SaveChanges();
-
+            await visitService.RegisterToDoctorAsync(visitView);
 
             return RedirectToAction(nameof(ApproveToVisit));
         }
@@ -134,9 +72,9 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public IActionResult ShowSchedule()
         {
-            var schedule = db.schedule.Include(x => x.Doctor).Include(x => x.Patient);
+            var visit = visitService.GetVisits();
 
-            return View(schedule);
+            return View(visit);
         }
 
     }
