@@ -1,11 +1,23 @@
 ﻿@model IEnumerable<Doctor>
 
 
-@using (Html.BeginForm("FilterDoctorsByFullName", "Doctor"))
+@using (Html.BeginForm("Filter", "Doctor"))
 {
     <p>
         Filter by Name: @Html.TextBox("name")
-        Filter by SurName: @Html.TextBox("surName")
+        SurName: @Html.TextBox("surName")
+        Speciality:
+        <select name="speciality">
+            <option value = "">-</option>
+            @foreach (var doctor in Model.DistinctBy(n=>n.Specialty))
+            {
+                <option value="@doctor.Specialty">
+                    @doctor.Specialty
+                </option>
+
+            }
+        </select>
+
 
         <input type="submit" value="Filter" />
     </p>
@@ -13,13 +25,18 @@
 
 
 
+
+
 @using (Html.BeginForm("ShowAllDoctors", "Doctor"))
 {
     <p>
-        
+
         <input type="submit" value="Clear" />
     </p>
 }
+
+
+
 
 <table class="table-bordered">
 

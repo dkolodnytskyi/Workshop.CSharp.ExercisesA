@@ -1,6 +1,16 @@
 ﻿@model IEnumerable<Visit>
 
-
+@using (Html.BeginForm("Filter", "Admin"))
+{
+    <p>
+        Filter by Patient Name: @Html.TextBox("patientName")
+        Patient SurName: @Html.TextBox("patientSurName")
+        Doctor Name: @Html.TextBox("doctorName")
+        Doctor SurName: @Html.TextBox("doctorSurName")
+       
+        <input type="submit" value="Filter" />
+    </p>
+}
 <table class="table-bordered">
 
     <thead>

@@ -77,5 +77,14 @@ namespace WebApplication2.Controllers
             return View(visit);
         }
 
+        [HttpPost]
+        public IActionResult Filter(string doctorName, string doctorSurName,string patientName, string patientSurName)
+        {
+            var result = visitService.Filter(doctorName, doctorSurName, patientName, patientSurName);
+
+            return View(nameof(ShowSchedule), result);
+
+        }
+
     }
 }

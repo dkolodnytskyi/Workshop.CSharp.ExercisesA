@@ -13,5 +13,11 @@ namespace WebApplication2.Services.Interfaces
         void Delete(int? id);
 
         IEnumerable<Patient> GetPatients();
+
+        IEnumerable<Patient> FilterByName(string name);
+
+        IEnumerable<Patient> FilterBySurName(string surName);
+
+        IEnumerable<Patient> Filter(string name, string surName);
     }
 }

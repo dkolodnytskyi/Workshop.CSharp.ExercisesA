@@ -20,6 +20,44 @@ namespace WebApplication2.Services
             return db.visits.Include(x => x.Doctor).Include(x => x.Patient).FirstOrDefault(x => x.Id == id);
         }
 
+        public IEnumerable<Visit> Filter(string doctorName, string doctorSurName, string patientName, string patientSurName)
+        {
+            if (doctorName == null && doctorSurName == null && patientName == null && patientSurName == null)
+            {
+                return GetVisits();
+            }
+
+            var filterByPatient = FilterByPatient(patientName, patientSurName);
+            var filterByDoctor = FilterByDoctor(doctorName, doctorSurName);
+
+            return filterByPatient.Intersect(filterByDoctor);
+
+        }
+
+        public IEnumerable<Visit> FilterByDoctor(string doctorName, string doctorSurName)
+        {
+            if (doctorName == null && doctorSurName == null)
+            {
+                return GetVisits();
+            }
+
+            return GetVisits().Where(m => m.Doctor.Name
+            .Contains(doctorName)).Where(m => m.Doctor.SurName
+            .Contains(doctorSurName)).OrderBy(m => m.Doctor.SurName);
+        }
+
+        public IEnumerable<Visit> FilterByPatient(string patientName, string patientSurName)
+        {
+            if (patientName == null && patientSurName == null)
+            {
+                return GetVisits();
+            }
+
+            return GetVisits().Where(m => m.Patient.Name
+            .Contains(patientName)).Where(m => m.Patient.SurName
+            .Contains(patientSurName)).OrderBy(m => m.Doctor.SurName);
+        }
+
         public IEnumerable<Doctor> GetDoctors()
         {
             return db.doctors;

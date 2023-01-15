@@ -25,6 +25,43 @@ namespace WebApplication2.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Patient> Filter(string name, string surName)
+        {
+            if (name == null && surName == null)
+            {
+                return GetPatients();
+            }
+
+            var filterbyname = FilterByName(name);
+            var filterbysurname = FilterBySurName(surName);
+
+
+
+            return filterbyname.Intersect(filterbysurname);
+        }
+
+        public IEnumerable<Patient> FilterByName(string name)
+        {
+            if (name == null)
+            {
+                return GetPatients();
+            }
+
+            return db.patients.Where(n => n.Name.Contains(name))
+                      .OrderBy(n => n.Name);
+        }
+
+        public IEnumerable<Patient> FilterBySurName(string surName)
+        {
+            if (surName == null)
+            {
+                return GetPatients();
+            }
+
+            return db.patients.Where(n => n.SurName.Contains(surName))
+                      .OrderBy(n => n.SurName);
+        }
+
         public IEnumerable<Patient> GetPatients()
         {
             return db.patients;

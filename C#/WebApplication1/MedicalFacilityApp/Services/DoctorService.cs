@@ -47,6 +47,11 @@ namespace WebApplication2.Services
 
         public IEnumerable<Doctor> FilterByName(string name)
         {
+            if (name == null)
+            {
+                return GetDoctors();
+            }
+
             return db.doctors.Where(n => n.Name.Contains(name))
                       .OrderBy(n => n.Name);
 
@@ -54,34 +59,45 @@ namespace WebApplication2.Services
 
         public IEnumerable<Doctor> FilterBySurName(string surName)
         {
+            if (surName == null)
+            {
+                return GetDoctors();
+            }
+
             return db.doctors.Where(n => n.SurName.Contains(surName))
                       .OrderBy(n => n.SurName);
 
         }
 
-        public IEnumerable<Doctor> FilterByFullName(string name, string surName)
+        public IEnumerable<Doctor> FilterBySpeciality(string speciality)
         {
-            if (name == null && surName == null)
+            if (speciality == null)
             {
                 return GetDoctors();
             }
-            if (name == null)
-            {
-                return FilterBySurName(surName);
-            }
 
-            if (surName == null)
-            {
-                return FilterByName(name);
-            }
-
-
-            return db.doctors.Where(n => n.Name.Contains(name))
-                            .Where(m => m.SurName.Contains(surName))
-                            .OrderBy(n => n.Name)
-                            .OrderBy(m => m.SurName);
-
+            return db.doctors.Where(n => n.Specialty == speciality);
 
         }
+       
+
+        public IEnumerable<Doctor> Filter(string name, string surName, string speciality)
+        {
+            if (name == null && surName == null && speciality == null)
+            {
+                return GetDoctors();
+            }
+
+            var filterbyname = FilterByName(name);
+            var filterbysurname = FilterBySurName(surName);
+            var filterbyspeciality = FilterBySpeciality(speciality);
+
+            
+
+           return filterbyname.Intersect(filterbysurname).Intersect(filterbyspeciality);
+
+        }
+
+        
     }
 }

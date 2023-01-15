@@ -80,13 +80,15 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult FilterDoctorsByFullName(string name, string surName)
+        public IActionResult Filter(string name, string surName,string speciality)
         {
-            var result = doctorService.FilterByFullName(name, surName);
+            var result = doctorService.Filter(name, surName, speciality);
 
             return View(nameof(ShowDoctors), result);
 
         }
+
+        
 
 
     }

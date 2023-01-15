@@ -15,6 +15,16 @@ namespace WebApplication2.Services.Interfaces
 
         IEnumerable<Visit> GetVisits();
 
+        IEnumerable<Visit> Filter(string doctorName, string doctorSurName, string patientName, string patientSurName);
+
+        IEnumerable<Visit> FilterByDoctor(string doctorName, string doctorSurName);
+
+        IEnumerable<Visit> FilterByPatient(string patientName, string patientSurName);
+
+
+
+
+
 
     }
 }

@@ -21,7 +21,9 @@ namespace WebApplication2.Services.Interfaces
 
         IEnumerable<Doctor> FilterBySurName(string surName);
 
-        IEnumerable<Doctor> FilterByFullName(string name, string surName);
+        IEnumerable<Doctor> FilterBySpeciality(string speciality);
+
+        IEnumerable<Doctor> Filter(string name, string surName, string speciality);
 
 
     }
