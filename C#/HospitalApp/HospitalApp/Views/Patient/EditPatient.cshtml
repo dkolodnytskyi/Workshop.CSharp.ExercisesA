@@ -1,0 +1,11 @@
+﻿@model Patient
+
+
+<form asp-controller="Patient" asp-action="SavePatientChanges">
+    <input readonly value="@Model.Id" asp-for="Id"/>
+    <input value="@Model.Name" asp-for="Name"/>
+    <input value="@Model.SurName" asp-for="SurName"/>
+    <input  type ="datetime" value="@Model.DateOfBirth" asp-for="DateOfBirth"/>
+    <input type="submit" value="save"/>
+
+</form>

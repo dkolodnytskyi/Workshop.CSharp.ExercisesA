@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Doctor>
+
+@if (Model != null)
+{
+    @foreach (var doctor in Model)
+    {
+        <tr>
+            <th>
+                @doctor.Name
+            </th>
+            <th>
+                @doctor.SurName
+            </th>
+            <th>
+                @doctor.Specialty
+            </th>
+            <th>
+                @doctor.VisitDuration
+            </th>
+
+            <th>
+                <form asp-controller="Admin" asp-action="ChooseDoctor" asp-route-id="@doctor.Id">
+                    <input type="submit" value="register" />
+                </form>
+            </th>
+        </tr>
+
+    }
+
+}
+

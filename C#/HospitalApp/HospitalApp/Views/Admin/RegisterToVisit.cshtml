@@ -1,0 +1,54 @@
+﻿@using HospitalApp.ViewModels
+@model VisitViewModel
+
+<div style="display:flex">
+    
+    <div>
+        @ViewBag.doctor.Name &nbsp;
+    </div>
+    <div>
+        @ViewBag.doctor.SurName &nbsp; 
+    </div>
+    <div>
+        @ViewBag.doctor.Specialty  &nbsp;
+    </div>
+    <div>
+        @ViewBag.doctor.VisitDuration &nbsp;
+    </div>
+</div>
+
+<form asp-controller="Admin" asp-action="RegisterToDoctor">
+    <input asp-for="DoctorId" value="@ViewBag.doctor.Id" style="display:none"/>
+   
+    <div>
+        Patient Name
+    </div>
+    <input type = "text" asp-for="PatientName"/>
+    <div>
+        Patient SurName
+    </div>
+    <input type = "text" asp-for="PatientSurName"/>
+    <div>
+        Date of birth
+    </div>
+    <input type = "date" asp-for="DateOfBirth"/>
+    <div>
+        Reason of your visit
+    </div>
+    <input type = "text" asp-for="ReasonOfVisit"/>
+    <div>
+        Day of visit
+    </div>
+    <input type = "date" asp-for="DayOfVisit"/>
+    <div>
+        Time of visit
+    </div>
+    <input type = "time" asp-for="TimeOfVisit" />
+    <small> Hospital hours are 9 am to 5 pm</small>
+    <input type="submit" value="send"/>
+
+</form>
+
+
+
+

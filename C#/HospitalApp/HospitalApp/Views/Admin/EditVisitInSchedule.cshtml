@@ -1,0 +1,15 @@
+﻿@model Visit
+
+
+<form asp-controller="Admin" asp-action="SaveVisitChanges">
+    <input readonly value="@Model.Id" asp-for="Id"/>
+    <input value="@Model.Doctor.Name" asp-for="Doctor.Name" readonly/> 
+    <input value="@Model.Doctor.SurName" asp-for="Doctor.SurName" readonly/>
+    <input value="@Model.Patient.Name" asp-for="Patient.Name" readonly/>
+    <input value="@Model.Patient.SurName" asp-for="Patient.SurName" readonly/>
+    <input value="@Model.ReasonOfVisit" asp-for="ReasonOfVisit"/>
+    <input value="@Model.DateOfVisit" asp-for="DateOfVisit"/>
+    
+    <input type="submit" value="save"/>
+
+</form>

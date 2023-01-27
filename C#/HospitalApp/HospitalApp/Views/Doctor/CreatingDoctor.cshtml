@@ -1,0 +1,16 @@
+﻿@using HospitalApp.Services.Interfaces
+@model Doctor
+@inject IDoctorService doctorService
+
+
+<form asp-controller="Doctor" asp-action="CreatingDoctor">
+    <input asp-for="Name"/>
+    <input asp-for="SurName"/>
+    <input asp-for="Specialty"/>
+    <input asp-for="VisitDuration"/>
+    <span asp-validation-for="VisitDuration"></span>
+   <input type="submit" value="send"/>
+    
+</form>
+
+@Html.Partial("ShowDoctors", doctorService.GetDoctors())

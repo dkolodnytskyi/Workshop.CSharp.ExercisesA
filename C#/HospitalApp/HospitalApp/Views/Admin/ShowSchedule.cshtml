@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Visit>
+
+@using (Html.BeginForm("Filter", "Admin"))
+{
+    <p>
+        Filter by Patient Name: @Html.TextBox("patientName")
+        Patient SurName: @Html.TextBox("patientSurName")
+        Doctor Name: @Html.TextBox("doctorName")
+        Doctor SurName: @Html.TextBox("doctorSurName")
+        Visit Day: @Html.TextBox("day")
+       
+        <input type="submit" value="Filter" />
+    </p>
+}
+<table class="table-bordered">
+
+    <thead>
+        <tr>
+            <th>
+                Patient
+            </th>
+            <th>
+                Doctor
+            </th>
+            <th>
+                Reason of visit
+            </th>
+            <th>
+                Day of visit
+            </th>
+            <th>
+                Time of start
+            </th>
+            <th>
+                Time of end
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var schedule in Model)
+            {
+                <tr>
+                    <th>
+                        @schedule.Patient.Name @schedule.Patient.SurName
+                    </th>
+                    <th>
+                        @schedule.Doctor.Name @schedule.Doctor.SurName @schedule.Doctor.Specialty @schedule.Doctor.VisitDuration 
+                    </th>
+                    <th>
+                        @schedule.ReasonOfVisit
+                    </th>
+                    <th>
+                        @schedule.DateOfVisit.ToShortDateString()
+                    </th>
+                    <th>
+                        @schedule.DateOfVisit.TimeOfDay
+                    </th>
+                    <th>
+                        @schedule.DateOfVisit.AddMinutes(schedule.Doctor.VisitDuration).TimeOfDay
+                    </th>
+                    <th>
+                        <form asp-controller="Admin" asp-action="EditVisitInSchedule" asp-route-id="@schedule.Id">
+                            <input type="submit" value="edit" />
+                        </form>
+                    </th>
+                    <th>
+                        <button asp-action="DeleteVisit">
+                            delete
+                        </button>
+                    </th>
+
+                </tr>
+
+            }
+
+        }
+
+    </tbody>
+</table>
+
+

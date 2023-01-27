@@ -1,0 +1,10 @@
+﻿@model Doctor
+
+<form asp-controller="Doctor" asp-action="SaveDoctorChanges" >
+    <input readonly value="@Model.Id" asp-for="Id"/>
+    <input value="@Model.Name" asp-for="Name"/>
+    <input value="@Model.SurName" asp-for="SurName"/>
+    <input value="@Model.Specialty" asp-for="Specialty"/>
+    <input value="@Model.VisitDuration" asp-for="VisitDuration"/>
+    <input type="submit" value="save"/>
+</form>
