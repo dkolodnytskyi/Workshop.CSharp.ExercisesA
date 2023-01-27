@@ -5,6 +5,7 @@ using HospitalApp.Models;
 using HospitalApp.Services.Interfaces;
 using HospitalApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using HospitalApp.Validations;
 
 namespace HospitalApp.Controllers
 {
@@ -66,9 +67,19 @@ namespace HospitalApp.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterToDoctor(VisitViewModel visitView)
         {
-           
             var visit = visitService.VisitIsBooked(visitView);
 
+            if (!Validator.IsDayValid(visitView.DayOfVisit))
+            {
+                return RedirectToAction(nameof(NotApprove));
+
+            }
+
+            if (!Validator.IsHourValid(visitView.TimeOfVisit))
+            {
+                return RedirectToAction(nameof(NotApprove));
+            }
+ 
             if (!visit)
             {
                 return RedirectToAction(nameof(CreateVisit));
@@ -81,6 +92,11 @@ namespace HospitalApp.Controllers
 
         [HttpGet]
         public IActionResult ApproveToVisit()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult NotApprove()
         {
             return View();
         }

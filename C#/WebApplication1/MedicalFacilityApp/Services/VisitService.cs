@@ -27,6 +27,8 @@ namespace WebApplication2.Services
                 return GetVisits();
             }
 
+            
+
             var filterByPatient = FilterByPatient(patientName, patientSurName);
             var filterByDoctor = FilterByDoctor(doctorName, doctorSurName);
 
@@ -41,6 +43,20 @@ namespace WebApplication2.Services
                 return GetVisits();
             }
 
+            if(doctorName == null && doctorSurName != null)
+            {
+                return GetVisits().Where(m=>m.Doctor.SurName
+                .Contains(doctorSurName)).OrderBy(m=>m.Doctor.SurName);
+            }
+
+            if (doctorName != null && doctorSurName == null)
+            {
+                return GetVisits().Where(m => m.Doctor.Name
+                .Contains(doctorName)).OrderBy(m => m.Doctor.Name);
+            }
+
+
+
             return GetVisits().Where(m => m.Doctor.Name
             .Contains(doctorName)).Where(m => m.Doctor.SurName
             .Contains(doctorSurName)).OrderBy(m => m.Doctor.SurName);
@@ -53,9 +69,23 @@ namespace WebApplication2.Services
                 return GetVisits();
             }
 
+            if (patientName == null && patientSurName != null)
+            {
+                return GetVisits().Where(m => m.Patient.SurName
+                .Contains(patientSurName)).OrderBy(m => m.Patient.SurName);
+            }
+
+            if (patientName != null && patientSurName == null)
+            {
+                return GetVisits().Where(m => m.Patient.Name
+                .Contains(patientName)).OrderBy(m => m.Patient.Name);
+            }
+
+
+
             return GetVisits().Where(m => m.Patient.Name
             .Contains(patientName)).Where(m => m.Patient.SurName
-            .Contains(patientSurName)).OrderBy(m => m.Doctor.SurName);
+            .Contains(patientSurName)).OrderBy(m => m.Patient.SurName);
         }
 
         public IEnumerable<Doctor> GetDoctors()
