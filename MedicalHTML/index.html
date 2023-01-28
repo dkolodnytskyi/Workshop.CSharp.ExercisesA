@@ -1,18 +1,58 @@
 <!DOCTYPE html>
-<html lang = "en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, intial scale =1.0">
-    <title>Hospital</title>
-    <link rel = "stylesheet" href = "css/normalize.css">
-    <link rel = "stylesheet" href = "css/main.css">
+<html>
+    <head>
+        <link rel="stylesheet"  href="style.css"/>
+    </head>
+        <body>
+            <header class="main-header">
+               <nav class="nav main-nav">
+                    <ul>
+                        <li><img class = "img-logo" src = "images/logo.jpg" width = "50" height = "50" ><a href="index.html">MedicsGo</a></li>                        
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="https://www.medicover.pl/en/coronavirus/vaccination/">Covid-19 & vaccination</a></li>                       
+                        <li><img  class ="img-login" src="images/login.jpg" width="50" height="50"  ><a href ="registration.html">Log in & Sing up</a></li>                        
+                    </ul>
+                </nav>              
+            </header>
+            <nav class = "main-middle">
+                <ul class="nav main-ul">
+                    <h1>Find doctor and make an appointment</h1>
+                <select name = "specialty" id ="specialty">
+                    <option value ="psycholog">Psycholog</option>
+                    <option value ="chirurg">Chirurg</option>
+                </select>
+                <div class="topnav">
+                    <input type="text" placeholder="Search..">
+                  </div>
+                  <button>Search</button>
+                  <h3>You can download our application</h3>
 
-
-</head>
-<body>
-
-    <script src = "js/script.js"></script> 
+                  <ul>
+                    <li><img src="Images/apple.png" width = "50" height="50"> </li>
+                </ul>
+                </ul>
+                
+            </nav>
+            
+            
+            <section>
+                <h3>LIKED THE SYSTEM?</h3>
+                <h2>DO NOT SELF-MEDICATE, CONSULT A DOCTOR!</h2>
+                <button>Create a medical card</button>
+            </section>
+        <footer>
+            <h3>Contact</h3>
+            <ul>
+                <li><img src ="images/email.jpg" width="50" height="50"></li>
+                <h4>support@medics.ua</h4>
+                <li><img src="images/phone.png" width="50" height="50"></li>
+                <h4>+38 (097) 141 34 94</h4>
+                <li><img src="images/fb.png" width="50" height="50"></li>
+                <li><img src="images/youtube.png" width="50" height="50"></li>
+                <li><img src="images/instagram.jpg" width="50" height="50"></li>
+            </ul>
+            
+        </footer>
 
 </body>
 </html>
