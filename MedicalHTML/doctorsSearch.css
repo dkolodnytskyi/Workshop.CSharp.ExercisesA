@@ -1,0 +1,53 @@
+.doctors-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-by-specialty.search-by-specialty {
+    display: flex;
+}
+
+.doctor-profile {
+    display: inline-flex;
+
+}
+
+.doctor-intials {
+    display: block;
+}
+
+.register-button {
+    margin: 6px;
+    width: 70px;
+    height: 30px;
+}
+
+.edit-button {
+    margin: 6px;
+    width: 70px;
+    height: 30px;
+}
+
+.search-button {
+    margin: 6px;
+    width: 70px;
+    height: 30px;
+  
+}
+
+.delete-button {
+    margin: 6px;
+    width: 70px;
+    height: 30px;
+}
+
+.main-content {
+    text-align: center;
+}
+
+
+.doctors-main {
+    margin: auto;
+    width: 50%;
+    padding: 10px
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login & SignUp Form</title>
+    <link rel="stylesheet" href="LogSignupStyle.css" />
+    <meta name="viewport" content="width=device-wigth, intial-scale=1.0">
+</head>
+<header class="main-header">
+    <nav class="nav main-nav">
+         <ul>          
+             <li><img class = "img-logo" src = "images/logo.jpg" width = "50" height = "50" ><a href="index.html">MedicsGo</a></li>                        
+             <li><a href="doctors.html">Doctors</a></li>
+             <li><a href="https://www.medicover.pl/en/coronavirus/vaccination/">Covid-19 & vaccination</a></li>                       
+             <li><img  class ="img-login" src="images/login.jpg" width="50" height="50"  ><a href ="login.html">Log in & Sign up</a></li>
+             <li><a href="CreateDoctor.html">Create doctor</a></li>
+             <li><a href="CreateVisit.html">Create visit</a></li>                      
+         </ul>
+     </nav>              
+ </header>
+
+<body>
+    <div class="wrapper">
+        <div class="title-text">
+            <div class="title login">Login Form</div>
+            <div class="title signup">Signup Form</div>
+        </div>
+        
+        <div class="form-container">
+            <div class="slide-controls">
+                <input type="radio" name="slider" id="login" checked>
+                <input type="radio" name="slider" id="signup">
+                <label for="login" class="slide login">Login</label>
+                <label for="signup" class="slide signup">Signup</label>
+                <div class="slide-tab"></div>
+            </div>
+            <div class="form-inner">
+                <form action="#" class="login">
+                    <div class="field">
+                        <input type="text" placeholder="Email Adress" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <div class="pass-link"><a href="#">Forgot password?</a></div>
+                    <div class="field">
+                        <input type="submit" value="Login">
+                    </div>
+                    <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+                </form>
+                <form action="#" class="signup">
+                    <div class="field">
+                        <input type="text" placeholder="Name" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Surname" required>
+                    </div>
+                    <div class="field">
+                        <input type="date" placeholder="DateofBirth" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Email Adress" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Confirm password" required>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Signup">
+                    </div>
+                    
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const loginForm = document.querySelector("form.login");
+        const signupForm = document.querySelector("form.signup");
+        const loginBtn = document.querySelector("label.login");
+        const signupBtn = document.querySelector("label.signup");
+        const signupLink = document.querySelector(".signup-link a");
+        const loginText = document.querySelector(".title-text .login");
+        const signupText = document.querySelector(".title-text .signup");
+        signupBtn.onclick = (()=>{
+            loginForm.style.marginLeft = "-50%";
+            loginText.style.marginLeft = "-50%";
+        });
+        loginBtn.onclick = (()=>{
+            loginForm.style.marginLeft = "0%";
+            loginText.style.marginLeft = "0%";
+        });
+        signupLink.onclick = (()=>{
+            signupBtn.click();
+            return false;
+        });
+    </script>
+</body>
+
+</html>

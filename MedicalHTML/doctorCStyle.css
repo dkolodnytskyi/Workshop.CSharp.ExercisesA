@@ -6,44 +6,25 @@
     color: #777;
 }
 
-.html, body{
-    
+.main-create h1{
+    color: brown;
+}
+.nav li{
+    display: inline;
 }
 
 .nav-ul{
     margin: 0;
 }
 
-.nav li{
-    display: inline;
-}
-
-.footer li{
-    margin: 20px;
-    display: inline;
-}
-
-.footer a{
-    align-items: center;
-    padding: .5em;
-    color: white;
-    text-decoration: none;
-}
-
 .nav a {
     align-items: center;
     padding: .5em;
-    color: white;
+    color:white;
     text-decoration: none;
 }
-.main-middle{
-    background-image: url(images/flag-ukraine.jpg);
-    background-blend-mode: multiply;
-    background-size:auto;
-    padding-bottom: 50px;
 
-}
-.main-middle{
+.main-ul{
     text-align: center;
     font-size: 1.1em;
     font-weight: lighter;
@@ -70,37 +51,30 @@
 
 }
 
-.img-logo{
-    align-items: center;
-
-}
-.img-login{}
-
-
-
 .main-header{
     background-image: url("images/Aero.jpg");
     
     
 }
 
-.main-footer{
-    background-image: url("images/footer.jpg");
-    
+.main-create{
+    text-align: center;
 }
 
-.contact-main{
-    clear: both;
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
+.main-create form .field input {
+    height: 40%;
+    width: 10%;
+    outline: none;
+    padding-left: 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    border: 2px solid lightgrey;
+    border-bottom-width: 4px;
+    transition: all 0.4s ease;
 }
 
-.contact-main ul{
-    align-items: center;
-    padding: .5em;
-    color: white;
-    text-decoration: none;
-
+.main-create form .field{
+    height: 80px;
+    width: 100%;
+    margin-inline-start: 10px;
 }
-
