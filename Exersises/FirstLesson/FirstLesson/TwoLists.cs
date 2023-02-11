@@ -12,7 +12,7 @@ namespace FirstLesson
         {
             List<int> result = new List<int>();
 
-            /*for (int i = 0; i < list1.Count; i++)
+            for (int i = 0; i < list1.Count; i++)
             {
                 for (int j = 0; j < list2.Count; j++)
                 {
@@ -27,12 +27,12 @@ namespace FirstLesson
                         result.Add(list1[i]);
                     }
 
-                    
+
                 }
 
-            }*/
+            }
 
-            
+
 
             return result;
 
