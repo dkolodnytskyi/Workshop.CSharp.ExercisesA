@@ -9,7 +9,7 @@ using HospitalApp.Validations;
 
 namespace HospitalApp.Controllers
 {
-    [Authorize]
+    
     public class AdminController : Controller
     {
         public IVisitService visitService;

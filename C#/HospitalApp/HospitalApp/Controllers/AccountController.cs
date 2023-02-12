@@ -7,6 +7,7 @@ namespace HospitalApp.Controllers
 {
     public class AccountController : Controller
     {
+        
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
@@ -25,7 +26,8 @@ namespace HospitalApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, Password = model.Password};
+                User user = new User { Email = model.Email, Password = model.Password, UserName = model.Email};
+
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -55,27 +57,25 @@ namespace HospitalApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var result =
+            var result =
                     await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+            if (result.Succeeded)
+            {
+                // проверяем, принадлежит ли URL приложению
+                if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                 {
-                    // проверяем, принадлежит ли URL приложению
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return Redirect(model.ReturnUrl);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    return RedirectToAction("Index", "Home");
                 }
             }
+            else
+            {
+                ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+            }
+            
             return View(model);
         }
 
