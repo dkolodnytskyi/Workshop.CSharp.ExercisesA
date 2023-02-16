@@ -1,102 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@1,200&display=swap');
-
-*{
-    box-sizing: border-box;
-    font-family: Poppins;
-    color: #777;
-}
-
-.html, body{
-    
-}
-
-.nav-ul{
+h1 {
     margin: 0;
+    margin-bottom: 10px;
 }
 
-.nav li{
-    display: inline;
-}
 
-.footer li{
+.footer li {
     margin: 20px;
     display: inline;
 }
 
-.footer a{
+.footer a {
     align-items: center;
     padding: .5em;
     color: white;
     text-decoration: none;
 }
 
-.nav a {
-    align-items: center;
-    padding: .5em;
-    color: white;
-    text-decoration: none;
-}
-.main-middle{
-    background-image: url(images/flag-ukraine.jpg);
+
+.main-middle {
+    background-color: antiquewhite;
     background-blend-mode: multiply;
-    background-size:auto;
+    background-size: auto;
     padding-bottom: 50px;
 
 }
-.main-middle{
+
+.main-middle {
     text-align: center;
     font-size: 1.1em;
     font-weight: lighter;
     border-bottom: 1px solid rgba(255, 255, 255, .3);
 }
-.main-nav{
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    font-size: 1.1em;
-    font-weight: lighter;
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
 
-}
-
-.main-nav li{
-    margin-inline: 30px;
-
-}
-
-.nav a:hover{
-    background-color: rgba(255, 255, 255, .3);
-
-}
-
-.img-logo{
+.img-logo {
     align-items: center;
 
 }
-.img-login{}
 
-
-
-.main-header{
-    background-image: url("images/Aero.jpg");
-    
-    
+.top-nav {
+    justify-content: center;
 }
 
-.main-footer{
+
+.main-footer {
     background-image: url("images/footer.jpg");
-    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
 }
 
-.contact-main{
+.contact-main {
     clear: both;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
 }
 
-.contact-main ul{
+.contact-main ul {
     align-items: center;
     padding: .5em;
     color: white;
@@ -104,3 +65,19 @@
 
 }
 
+.button {
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    background: #1e90ff;
+    font-weight: bold;
+}
+
+.top-nav {
+    width: 30px;
+    height: 50px;
+}

@@ -1,48 +1,88 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
 .doctors-main {
-    display: flex;
-    flex-direction: column;
+    margin: 0;  
 }
 
-.search-by-specialty.search-by-specialty {
-    display: flex;
-}
 
-.doctor-profile {
-    display: inline-flex;
-
-}
-
-.doctor-intials {
+.doctor-info{
     display: block;
+
 }
 
-.register-button {
-    margin: 6px;
-    width: 70px;
-    height: 30px;
+h1{
+    margin:0;
+    margin-bottom: 10px;
 }
 
-.edit-button {
-    margin: 6px;
-    width: 70px;
-    height: 30px;
+.doctor-profile{
+    display: flex;
+    justify-content: space-between;
 }
 
-.search-button {
-    margin: 6px;
-    width: 70px;
-    height: 30px;
-  
+.doctor-name{
+    margin-top: -10px;
 }
 
-.delete-button {
-    margin: 6px;
+.doctor-specialty{
+    margin-top: 5px;
+    
+}
+
+.doctor-visit-duration{
+    margin-top: 40px;
+}
+
+
+.button {
     width: 70px;
-    height: 30px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    background: #1e90ff;
+    font-weight: bold;
+    margin-inline: 14px;
+}
+
+.filters{
+    display: flex;
+    justify-content: center;
+ 
+    
+}
+
+input, select{
+    height: 40px;
+    width: 100px;
+    border: 1px solid #F7EFE5;
+    margin-inline: 20px;
+    font-family: "Roboto", sans-serif;
+    background: #F7EFE5;
+    border-radius: 20px;
+}
+
+.filters input{
+    width: 240px;
+
+
+}
+
+#duration{
+    width: 50px;
 }
 
 .main-content {
     text-align: center;
+    background-color: #BFDB38;
+    height: 100vh;
+    
 }
 
 
@@ -51,3 +91,4 @@
     width: 50%;
     padding: 10px
 }
+
