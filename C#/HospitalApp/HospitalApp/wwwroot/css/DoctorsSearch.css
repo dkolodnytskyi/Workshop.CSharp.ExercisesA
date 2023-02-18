@@ -1,38 +1,36 @@
-body{
+﻿body {
     padding: 0;
     margin: 0;
 }
 
 .doctors-main {
-    margin: 0;  
+    margin: 0;
 }
 
 
-.doctor-info{
+.doctor-info {
     display: block;
-
 }
 
-h1{
-    margin:0;
+h1 {
+    margin: 0;
     margin-bottom: 10px;
 }
 
-.doctor-profile{
+.doctor-profile {
     display: flex;
     justify-content: space-between;
 }
 
-.doctor-name{
+.doctor-name {
     margin-top: -10px;
 }
 
-.doctor-specialty{
+.doctor-specialty {
     margin-top: 5px;
-    
 }
 
-.doctor-visit-duration{
+.doctor-visit-duration {
     margin-top: 40px;
 }
 
@@ -49,18 +47,15 @@ h1{
     background: #1e90ff;
     font-weight: bold;
     margin-inline: 14px;
-    
 }
 
-.filters{
+.filters {
     display: flex;
     justify-content: center;
     background-color: #E5E0FF;
- 
-    
 }
 
-input, select{
+.select_inputs {
     height: 50px;
     width: 100px;
     border: 1px solid #F7EFE5;
@@ -70,13 +65,11 @@ input, select{
     border-radius: 20px;
 }
 
-.filters input{
+.filters input {
     width: 240px;
-
-
 }
 
-#duration{
+#duration {
     width: 50px;
 }
 
@@ -84,7 +77,6 @@ input, select{
     text-align: center;
     background-color: #C0EEF2;
     height: 100vh;
-    
 }
 
 
@@ -93,4 +85,3 @@ input, select{
     width: 50%;
     padding: 10px
 }
-

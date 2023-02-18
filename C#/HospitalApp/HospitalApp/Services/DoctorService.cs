@@ -1,6 +1,8 @@
 ﻿using HospitalApp.Data;
 using HospitalApp.Models;
 using HospitalApp.Services.Interfaces;
+using HospitalApp.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalApp.Services
 {
@@ -14,9 +16,27 @@ namespace HospitalApp.Services
         }
 
 
-        public async Task CreateAsync(Doctor doctor)
+        public async Task CreateAsync(DoctorViewModel doctor)
         {
-            await db.doctors.AddAsync(doctor);
+            Doctor newDoctor = new Doctor()
+            {
+                Id = doctor.Id,
+                Name = doctor.Name,
+                SurName = doctor.SurName,
+                VisitDuration= doctor.VisitDuration,
+                Specialty= doctor.Specialty,
+
+            };
+            
+            using (var memoryStream = new MemoryStream())
+            {
+                await doctor.image.CopyToAsync(memoryStream);
+                var imageData = memoryStream.ToArray();
+                newDoctor.image = imageData;
+                
+            }
+
+            await db.doctors.AddAsync(newDoctor);
 
             await db.SaveChangesAsync();
         }
@@ -79,11 +99,22 @@ namespace HospitalApp.Services
             return db.doctors.Where(n => n.Specialty == speciality);
 
         }
-       
 
-        public IEnumerable<Doctor> Filter(string name, string surName, string speciality)
+        public IEnumerable<Doctor> FilterByDuration(int? duration)
         {
-            if (name == null && surName == null && speciality == null)
+            if(duration == null)
+            {
+                return GetDoctors();
+            }
+
+            return db.doctors.Where(n => n.VisitDuration == duration);
+        }
+
+
+
+        public IEnumerable<Doctor> Filter(string name, string surName, string speciality, int? duration)
+        {
+            if (name == null && surName == null && speciality == null && duration == null)
             {
                 return GetDoctors();
             }
@@ -91,11 +122,17 @@ namespace HospitalApp.Services
             var filterbyname = FilterByName(name);
             var filterbysurname = FilterBySurName(surName);
             var filterbyspeciality = FilterBySpeciality(speciality);
+            var filterbyduration = FilterByDuration(duration);
 
             
 
-           return filterbyname.Intersect(filterbysurname).Intersect(filterbyspeciality);
+           return filterbyname.Intersect(filterbysurname).Intersect(filterbyspeciality).Intersect(filterbyduration);
 
+        }
+
+        public Doctor GetDoctorById(int id)
+        {
+            return db.doctors.FirstOrDefault(x => x.Id == id);
         }
 
         

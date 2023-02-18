@@ -2,6 +2,7 @@
 using HospitalApp.Data;
 using HospitalApp.Models;
 using HospitalApp.Services.Interfaces;
+using HospitalApp.ViewModels;
 
 namespace HospitalApp.Controllers
 {
@@ -20,18 +21,23 @@ namespace HospitalApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatingDoctor(Doctor doctor)
+        public async Task<IActionResult> CreatingDoctor(DoctorViewModel doctor)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("CreatingDoctor");
-            }
+            
             await doctorService.CreateAsync(doctor);
 
             ViewData["doctors"] = doctorService.GetDoctors();
 
             return View();
 
+        }
+
+        
+        public IActionResult GetDoctorImage(int id)
+        {
+            var doctor = doctorService.GetDoctorById(id);
+
+            return File(doctor.image,"image/jpeg");
         }
 
         [HttpGet]
@@ -88,9 +94,9 @@ namespace HospitalApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Filter(string name, string surName,string speciality)
+        public IActionResult Filter(string name, string surName,string speciality,int? duration)
         {
-            var result = doctorService.Filter(name, surName, speciality);
+            var result = doctorService.Filter(name, surName, speciality,duration);
 
             return View(nameof(ShowDoctors), result);
 
