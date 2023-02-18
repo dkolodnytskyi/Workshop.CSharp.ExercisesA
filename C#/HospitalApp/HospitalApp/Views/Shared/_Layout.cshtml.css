@@ -46,3 +46,26 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.Login{
+    display: flex;
+    
+}
+
+.navbar-nav{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.Hello{
+    align-items: center;
+    margin-left: 500px;
+    margin-top: 8px;
+}
+
+input{
+    background-color: transparent;
+    border: none;
+    margin-top: 7px;
+}

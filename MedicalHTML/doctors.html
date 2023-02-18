@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="doctorsSearch.css" />
+    <link rel="stylesheet" href="NavStyle.css" />
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="nav main-nav">
+            <ul>
+                <li><img class="img-logo" src="images/logo.jpg" width="50" height="50"><a href="index.html">MedicsGo</a>
+                </li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li><a href="https://www.medicover.pl/en/coronavirus/vaccination/">Covid-19 & vaccination</a></li>
+                <li><img class="img-login" src="images/login.jpg" width="50" height="50"><a href="LoginForm.html">Log in
+                        & Sign up</a></li>
+                <li><a href="CreateDoctor.html">Create doctor</a></li>
+                <li><a href="CreateVisit.html">Create visit</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-content">
+        <h1>Search doctors</h1>
+        <div class="filters">
+            <input type="text" placeholder="Enter doctors name or surname">
+            <div class="specialty-input">
+                <select name="specialty" id="specialty">
+                    <option value="psycholog">Psycholog</option>
+                    <option value="chirurg">Chirurg</option>
+                </select>
+            </div>
+
+            <select name="duration" id="duration">
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+                <option value="60">60</option>
+            </select>
+
+            <button class="button">Search</button>
+
+        </div>
+        <div class="doctors-main">
+            <div class="doctor-profile">
+                <img class="doctor-img" src="images/docotorB.jpg" width="150" height="150">
+                <div class="doctor-info">
+                    <h2 class="doctor-name">Name Surname</h2>
+                    <h3 class="doctor-specialty">specialty</h3>
+                    <h4 class="doctor-visit-duration">Visit duration</h4>
+                </div>
+
+                <button class="button" onclick="window.location.href='CreateVisit.html'">Register</button>
+                <button class="button">Edit</button>
+                <button class="button">Delete</button>
+
+            </div>
+
+
+        </div>
+
+        </div>
+</body>
+
+</html>

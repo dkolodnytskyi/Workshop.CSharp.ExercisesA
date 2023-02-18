@@ -1,0 +1,87 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+
+.doctors-main {
+    margin: 0;
+}
+
+
+.doctor-info {
+    display: block;
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.doctor-profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.doctor-name {
+    margin-top: -10px;
+}
+
+.doctor-specialty {
+    margin-top: 5px;
+}
+
+.doctor-visit-duration {
+    margin-top: 40px;
+}
+
+
+.button {
+    width: 70px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+    background: #1e90ff;
+    font-weight: bold;
+    margin-inline: 14px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    background-color: #E5E0FF;
+}
+
+.select_inputs {
+    height: 50px;
+    width: 100px;
+    border: 1px solid #F7EFE5;
+    margin-inline: 20px;
+    font-family: "Roboto", sans-serif;
+    background: #F7EFE5;
+    border-radius: 20px;
+}
+
+.filters input {
+    width: 240px;
+}
+
+#duration {
+    width: 50px;
+}
+
+.main-content {
+    text-align: center;
+    background-color: #C0EEF2;
+    height: 100vh;
+}
+
+
+.doctors-main {
+    margin: auto;
+    width: 50%;
+    padding: 10px
+}

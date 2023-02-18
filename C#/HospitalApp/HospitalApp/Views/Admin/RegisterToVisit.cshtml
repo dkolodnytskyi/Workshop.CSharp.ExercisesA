@@ -19,34 +19,35 @@
 
 <form asp-controller="Admin" asp-action="RegisterToDoctor">
     <input asp-for="DoctorId" value="@ViewBag.doctor.Id" style="display:none"/>
-   
-    <div>
-        Patient Name
-    </div>
-    <input type = "text" asp-for="PatientName"/>
-    <div>
-        Patient SurName
-    </div>
-    <input type = "text" asp-for="PatientSurName"/>
-    <div>
-        Date of birth
-    </div>
-    <input type = "date" asp-for="DateOfBirth"/>
-    <div>
-        Reason of your visit
-    </div>
-    <input type = "text" asp-for="ReasonOfVisit"/>
-    <div>
-        Day of visit
-    </div>
-    <input type = "date" asp-for="DayOfVisit"/>
-    <div>
-        Time of visit
-    </div>
-    <input type = "time" asp-for="TimeOfVisit" />
-    <small> Hospital hours are 9 am to 5 pm</small>
-    <input type="submit" value="send"/>
+   <div class="main-create">
+        <h1>Create Visit</h1>
+        <form action="#" class="visitInfo">
+            <div class="field">
+                <input type="text" asp-for="PatientName" placeholder="Enter your name" required>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="PatientSurName" placeholder="Enter your surname" required>
+            </div>
+            <div class="field">
+                <input type="date" asp-for="DateOfBirth" placeholder="Date of birth" required>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="ReasonOfVisit" placeholder="Reason of the visit" required>
+            </div>
+            <div class="field">
+                <input type="date" asp-for="DayOfVisit" placeholder="Day of visit" required>
+            </div>
+            <div class="field">
+                <input type="time" asp-for="TimeOfVisit" placeholder="Time of the visit" required>
+            </div>
+     
+            <small> Hospital hours are 9 am to 5 pm</small>
+            <input class="button_create" type="submit" value="Create"/> 
+        </form>
 
+    </div>
+
+    
 </form>
 
 

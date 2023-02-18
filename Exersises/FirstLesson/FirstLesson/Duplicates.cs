@@ -8,7 +8,7 @@ namespace FirstLesson
 {
     internal class Duplicates
     {
-        public int RemoveDuplicates(int[] nums)
+        public static int RemoveDuplicates(int[] nums)
         {
             List<int> result = new List<int>();
             result.Add(nums[0]);
@@ -37,11 +37,11 @@ namespace FirstLesson
 
         public static void Test()
         {
-            Duplicates duplicates = new Duplicates();
+            
 
             int[] nums = new[] { 1, 1, 2, 2, 3, 3, 5, 6, };
 
-            Console.WriteLine(duplicates.RemoveDuplicates(nums)); 
+            Console.WriteLine(RemoveDuplicates(nums)); 
         }
 
     }

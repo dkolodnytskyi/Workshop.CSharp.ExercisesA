@@ -1,17 +1,26 @@
-﻿using HospitalApp.Areas.Identity.Pages.Account;
+﻿
 using HospitalApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace HospitalApp.ViewModels
 {
-    public class RegisterViewModel : RegisterModel
+    public class RegisterViewModel
     {
-        public RegisterViewModel(UserManager<Patient> userManager, 
-            IUserStore<Patient> userStore, SignInManager<Patient> signInManager, 
-            ILogger<RegisterModel> logger, IEmailSender emailSender) 
-            : base(userManager, userStore, signInManager, logger, emailSender)
-        {
-        }
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
+        public string Password { get; set; }
+
+        [Required]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Подтвердить пароль")]
+        public string PasswordConfirm { get; set; }
     }
 }

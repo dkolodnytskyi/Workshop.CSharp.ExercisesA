@@ -1,5 +1,6 @@
 ﻿using HospitalApp.Data;
 using HospitalApp.Models;
+using HospitalApp.ViewModels;
 
 namespace HospitalApp.Services.Interfaces
 
@@ -7,7 +8,7 @@ namespace HospitalApp.Services.Interfaces
     public interface IDoctorService
     {
  
-        Task CreateAsync(Doctor doctor);
+        Task CreateAsync(DoctorViewModel doctor);
         
         Doctor Update(int? id);
 
@@ -17,13 +18,17 @@ namespace HospitalApp.Services.Interfaces
 
         IEnumerable<Doctor> GetDoctors();
 
+        Doctor GetDoctorById(int id);
+
         IEnumerable<Doctor> FilterByName(string name);
 
         IEnumerable<Doctor> FilterBySurName(string surName);
 
         IEnumerable<Doctor> FilterBySpeciality(string speciality);
 
-        IEnumerable<Doctor> Filter(string name, string surName, string speciality);
+        IEnumerable<Doctor> FilterByDuration(int? duration);
+       
+        IEnumerable<Doctor> Filter(string name, string surName, string speciality, int? duration);
 
 
     }

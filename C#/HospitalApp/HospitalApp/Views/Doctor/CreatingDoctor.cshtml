@@ -1,16 +1,28 @@
-﻿@using HospitalApp.Services.Interfaces
-@model Doctor
-@inject IDoctorService doctorService
+﻿@using HospitalApp.Services.Interfaces;
+@using HospitalApp.ViewModels;
+@model DoctorViewModel
 
 
-<form asp-controller="Doctor" asp-action="CreatingDoctor">
-    <input asp-for="Name"/>
-    <input asp-for="SurName"/>
-    <input asp-for="Specialty"/>
-    <input asp-for="VisitDuration"/>
-    <span asp-validation-for="VisitDuration"></span>
-   <input type="submit" value="send"/>
-    
-</form>
+<div class="main-create">
+    <h1>Create doctor</h1>
+    <form asp-controller="Doctor" asp-action="CreatingDoctor" class="doctorInfo" enctype="multipart/form-data">
+        
+        <div class="field">
+            <input asp-for="Name" type="text" placeholder="Doctor Name" required>
+        </div>
+        <div class="field">
+            <input asp-for="SurName" type="text" placeholder="Doctor surname" required>
+        </div>
+        <div class="field">
+            <input asp-for="Specialty" type="text" placeholder="Doctor specialty" required>
+        </div>
+        <div class="field">
+            <input asp-for="VisitDuration" type="number" min="15" max="60" placeholder="Visit duration" required>
+        </div>
+        <div class="field">
+            <input asp-for="image" type="file">
+        </div>
+        <input class="button_create" type="submit" value="Create">                                      
+    </form>
+</div>
 
-@Html.Partial("ShowDoctors", doctorService.GetDoctors())

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System.ComponentModel.DataAnnotations;
 
 namespace HospitalApp.Models
 {
@@ -20,6 +21,7 @@ namespace HospitalApp.Models
         public string Specialty { get; set; }
         [Range(0,60)]
         public int VisitDuration { get; set; }
+        public byte[] image { get; set; }
 
 
         /*public Doctor(string name, string surName, string specialty)
